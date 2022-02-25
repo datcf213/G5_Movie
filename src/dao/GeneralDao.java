@@ -93,7 +93,7 @@ public class GeneralDao<T>  {
 			entityManager.getTransaction().begin();
 			entityManager.merge(entity);
 			entityManager.getTransaction().commit();
-			entityManager.close();
+//			entityManager.close();
 			return entity;
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
@@ -106,7 +106,7 @@ public class GeneralDao<T>  {
 			entityManager.getTransaction().begin();
 			entityManager.remove(entity);
 			entityManager.getTransaction().commit();
-			entityManager.close();
+//			entityManager.close();
 			return entity;
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();

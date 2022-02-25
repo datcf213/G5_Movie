@@ -44,7 +44,7 @@
 												<li class="nav-item"><a class="nav-link tm-nav-link"
 													href="register">Register</a></li>
 												<li class="nav-item"><a class="nav-link tm-nav-link"
-													href="forgetPassword">Forget pasword</a></li>
+													href="forgetpassword">Forget pasword</a></li>
 											</c:otherwise>
 										</c:choose>
 									</ul>

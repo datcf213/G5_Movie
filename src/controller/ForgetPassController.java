@@ -21,7 +21,7 @@ public class ForgetPassController extends HttpServlet{
 	UserDao userDao = new UserDaoImpl();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/user/quenmatkhau.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/user/forgetPassword.jsp").forward(request, response);
 	}
 
 	String capChas="";
@@ -43,27 +43,27 @@ public class ForgetPassController extends HttpServlet{
 				} else {
 					System.out.println("chua");
 				}
-				request.getRequestDispatcher("/views/user/confirmcapcha.jsp").forward(request, response);	
+				request.getRequestDispatcher("/views/user/confirmCapcha.jsp").forward(request, response);	
 			} catch (Exception e) {
 				doGet(request, response);
 			}
 		} else if (url.contains("/confirmcapcha")) {
 			String cap = request.getParameter("capcha");
 			if (cap.equals(capChas)) {
-				request.getRequestDispatcher("/views/user/confirmpassword.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/user/confirmPassword.jsp").forward(request, response);
 			} else {
-				request.getRequestDispatcher("/views/user/confirmcapcha.jsp").forward(request, response);	
+				request.getRequestDispatcher("/views/user/confirmCapcha.jsp").forward(request, response);	
 			}
 		} else if (url.contains("/confirmpassword")) {
-			String pass = request.getParameter("pass");
+			String pass = request.getParameter("password");
 			
 			user.setPassword(pass);
 			try {
 				userDao.create(user);
-				request.getRequestDispatcher("/views/user/index.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/user/login.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-				request.getRequestDispatcher("/views/user/confirmpassword.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/user/confirmPassword.jsp").forward(request, response);
 			}
 		}
 	}
