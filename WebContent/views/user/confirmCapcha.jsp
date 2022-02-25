@@ -27,7 +27,7 @@
 			<div class="mx-auto pb-3 tm-about-text-container px-3">
 				<div class="row" style="display: grid; place-items: center;">
 					<div class="col-lg-6 mb-5">
-						<form id="contact-form" action="login" method="POST"
+						<form id="contact-form" action="confirmcapcha" method="POST"
 							class="tm-contact-form">
 							<div class="form-group">
 								<input type="text" name="capcha"
