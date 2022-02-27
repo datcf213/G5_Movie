@@ -15,7 +15,7 @@
 			<main>
 			<div class="row">
 				<div class="col-12">
-					<h2 class="tm-page-title mb-4">Movie list</h2>
+					<h2 class="tm-page-title mb-4">Favorite</h2>
 				</div>
 			</div>
 
@@ -41,11 +41,16 @@
 			<div>
 				<ul class="nav tm-paging-links"
 					style="display: flex; justify-content: center;">
-					<c:forEach varStatus="i" begin="1" end="${maxPage}">
-						<li class="nav-item ${currentPage == i.index ? 'active' : ''}">
-							<a href="<c:url value='/index?page=${i.index}'/>" class="nav-link tm-paging-link">${i.index}</a>
-						</li>
-					</c:forEach>
+					<li class="nav-item active"><a href="#"
+						class="nav-link tm-paging-link">1</a></li>
+					<li class="nav-item"><a href="#"
+						class="nav-link tm-paging-link">2</a></li>
+					<li class="nav-item"><a href="#"
+						class="nav-link tm-paging-link">3</a></li>
+					<li class="nav-item"><a href="#"
+						class="nav-link tm-paging-link">4</a></li>
+					<li class="nav-item"><a href="#"
+						class="nav-link tm-paging-link">></a></li>
 				</ul>
 			</div>
 			</main>

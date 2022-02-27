@@ -7,7 +7,7 @@ import entity.User;
 public class UserDaoImpl extends GeneralDao<User> implements UserDao{
 
 	@Override
-	public User fidnById(int id) {
+	public User findById(int id) {
 		return super.findById(User.class, id);
 	}
 

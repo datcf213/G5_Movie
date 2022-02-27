@@ -36,6 +36,8 @@
 												<li class="nav-item"><a class="nav-link tm-nav-link"
 													href="history">History</a></li>
 												<li class="nav-item"><a class="nav-link tm-nav-link"
+													href="changePassword">Change Password</a></li>
+												<li class="nav-item"><a class="nav-link tm-nav-link"
 													href="logout">Logout</a></li>
 											</c:when>
 											<c:otherwise>

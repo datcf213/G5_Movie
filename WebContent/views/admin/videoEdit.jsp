@@ -1,5 +1,5 @@
 <%@ page pageEncoding="utf-8"%>
-<%@ include file="/views/common/taglib.jsp"%>
+<%@ include file="/views/general/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,9 +56,9 @@
 				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
 					href="#" role="button"><i class="fas fa-bars"></i></a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a
-					href="index3.html" class="nav-link">Trang chủ</a></li>
+					href="index3.html" class="nav-link">Home</a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a href="#"
-					class="nav-link">Liên hệ</a></li>
+					class="nav-link">Contact</a></li>
 			</ul>
 
 			<!-- Right navbar links -->
@@ -200,11 +200,12 @@
 				<!-- Sidebar user panel (optional) -->
 				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 					<div class="image">
-						<img src="<c:url value='/views/admin/dist/img/myImage.jpg'/>"
+						<img
+							src="<c:url value='/views/admin/dist/img/user3-128x128.jpg'/>"
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a href="#" class="d-block">Đình Đạt</a>
+						<a href="#" class="d-block">${sessionScope.currentUser.username}</a>
 					</div>
 				</div>
 
@@ -231,24 +232,34 @@
 							class="nav-link active"> <i
 								class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
-									Trang chủ 
+									Videos <i class="right fas fa-angle-left"></i>
 								</p>
-						</a></li>
+						</a> <c:url var="uri" value="/admin" />
+							<ul class="nav nav-treeview">
+								<li class="nav-item"><a href="${uri}/videoOverview.jsp"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
+										<p>Manage</p>
+								</a></li>
+								<li class="nav-item"><a href="${uri}/videoEdit.jsp"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
+										<p>Edit or Add</p>
+								</a></li>
+							</ul></li>
 						<li class="nav-item menu-open"><a href="#"
 							class="nav-link active"> <i
 								class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
-									Các video <i class="right fas fa-angle-left"></i>
+									User <i class="right fas fa-angle-left"></i>
 								</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="./index.html"
-									class="nav-link active"> <i class="far fa-circle nav-icon"></i>
-										<p>Quản lí</p>
-								</a></li>
-								<li class="nav-item"><a href="./index2.html"
+								<li class="nav-item"><a href="${uri}/user-overview.jsp"
 									class="nav-link"> <i class="far fa-circle nav-icon"></i>
-										<p>Chỉnh sửa</p>
+										<p>Manager</p>
+								</a></li>
+								<li class="nav-item"><a href="${uri}/user-edit.jsp"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
+										<p>Edit or Add</p>
 								</a></li>
 							</ul></li>
 					</ul>
@@ -265,16 +276,93 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1 class="m-0">Trang chủ</h1>
+							<h1 class="m-0">Edit video</h1>
 						</div>
 						<!-- /.col -->
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
 							</ol>
 						</div>
 						<!-- /.col -->
 					</div>
+					<c:url var="url" value="/admin/videoEdit" />
+					<form action="${url}/index">
+						<section class="content">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="card card-primary">
+											<div class="card-header">
+												<h3 class="card-title">Add/Edit Video</h3>
+
+												<div class="card-tools">
+													<button type="button" class="btn btn-tool"
+														data-card-widget="collapse" title="Collapse">
+														<i class="fas fa-minus"></i>
+													</button>
+												</div>
+											</div>
+											<div class="card-body">
+												<div class="form-group">
+													<label for="title">Title</label> <input type="text"
+														id="title" value="${video.title}" class="form-control">
+												</div>
+												<div class="form-group">
+													<label for="href">Href</label> <input type="text" id="href"
+														name="href" value="${video.href}" class="form-control">
+												</div>
+												<div class="form-group">
+													<div class="row">
+														<div class="col-9">
+															<div class="row">
+																<div class="col-12 form-group">
+																	<label for="description">Description</label>
+																	<textarea id="description" class="form-control"
+																		rows="4">${video.description}</textarea>
+																</div>
+																<div class="col-12 form-group">
+																	<label for="poster">Poster</label> <input type="text"
+																		id="poster" value="${video.poster}"
+																		class="form-control">
+																</div>
+															</div>
+														</div>
+														<div class="col-3">
+															<label for="inputProjectLeader">Preview</label>
+															<div
+																style="width: 100%; height: 200px; border: 1px dotted gray">
+																<img id="imgPreview"
+																	src="<c:url value='/views/user/img/${video.poster}'/>"
+																	height="100%" width="100%" />
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /.card-body -->
+										</div>
+										<!-- /.card -->
+									</div>
+									<div class="form-group row">
+										<div class="col-sm-10">
+											<button onclick="return kiemTra()" formaction="${url}/create"
+												class="btn btn-outline-secondary">Create</button>
+											<button onclick="return kiemTra()" formaction="${url}/update"
+												class="btn btn-outline-secondary">Update</button>
+											<button onclick="return kiemTra()" formaction="${url}/delete"
+												class="btn btn-outline-secondary">Delete</button>
+											<a class="btn btn-primary" href="${url}index.jsp"
+												role="button">Reset</a>
+										</div>
+									</div>
+								</div>
+								<center>
+									<h5 id="message"></h5>
+								</center>
+							</div>
+						</section>
+					</form>
 					<!-- /.row -->
 				</div>
 				<!-- /.container-fluid -->
@@ -352,5 +440,6 @@
 	<script src="<c:url value='/views/admin/dist/js/demo.js'/>"></script>
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script src="<c:url value='/views/admin/dist/js/pages/dashboard.js'/>"></script>
+
 </body>
 </html>
