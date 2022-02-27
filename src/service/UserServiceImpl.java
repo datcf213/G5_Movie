@@ -1,6 +1,5 @@
 package service;
 
-import java.util.Iterator;
 import java.util.List;
 
 import dao.UserDao;
@@ -16,9 +15,9 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public User fidnById(int id) {
+	public User findById(int id) {
 
-		return dao.fidnById(id);
+		return dao.findById(id);
 	}
 
 	@Override

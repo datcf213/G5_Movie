@@ -1,5 +1,5 @@
 <%@ page pageEncoding="utf-8"%>
-<%@ include file="/views/common/taglib.jsp"%>
+<%@ include file="/views/general/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,9 +56,9 @@
 				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
 					href="#" role="button"><i class="fas fa-bars"></i></a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a
-					href="index3.html" class="nav-link">Trang chủ</a></li>
+					href="index3.html" class="nav-link">Home</a></li>
 				<li class="nav-item d-none d-sm-inline-block"><a href="#"
-					class="nav-link">Liên hệ</a></li>
+					class="nav-link">Contact</a></li>
 			</ul>
 
 			<!-- Right navbar links -->
@@ -200,11 +200,12 @@
 				<!-- Sidebar user panel (optional) -->
 				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 					<div class="image">
-						<img src="<c:url value='/views/admin/dist/img/myImage.jpg'/>"
+						<img
+							src="<c:url value='/views/admin/dist/img/user3-128x128.jpg'/>"
 							class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a href="#" class="d-block">Đình Đạt</a>
+						<a href="#" class="d-block">${sessionScope.currentUser.username}</a>
 					</div>
 				</div>
 
@@ -231,42 +232,34 @@
 							class="nav-link active"> <i
 								class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
-									Trang chủ 
+									Videos <i class="right fas fa-angle-left"></i>
 								</p>
-						</a></li>
+						</a> <c:url var="url" value="/admin" />
+							<ul class="nav nav-treeview">
+								<li class="nav-item"><a href="${url}/videoOverview.jsp"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
+										<p>Manage</p>
+								</a></li>
+								<li class="nav-item"><a href="${url}/videoEdit.jsp"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
+										<p>Edit or Add</p>
+								</a></li>
+							</ul></li>
 						<li class="nav-item menu-open"><a href="#"
 							class="nav-link active"> <i
 								class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
-									Các video <i class="right fas fa-angle-left"></i>
+									User <i class="right fas fa-angle-left"></i>
 								</p>
-						</a>
-							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="./index.html"
-									class="nav-link active"> <i class="far fa-circle nav-icon"></i>
-										<p>Quản lí</p>
-								</a></li>
-								<li class="nav-item"><a href="./index2.html"
-									class="nav-link"> <i class="far fa-circle nav-icon"></i>
-										<p>Chỉnh sửa</p>
-								</a></li>
-							</ul></li>
-							<li class="nav-item menu-open"><a href="#"
-							class="nav-link active"> <i
-								class="nav-icon fas fa-tachometer-alt"></i>
-								<p>
-									Người dùng <i class="right fas fa-angle-left"></i>
-								</p>
-						</a>
-							<c:url var="url" value="/admin" />
+						</a> 
 							<ul class="nav nav-treeview">
 								<li class="nav-item"><a href="${url}/user-overview.jsp"
-									class="nav-link active"> <i class="far fa-circle nav-icon"></i>
-										<p>Quản lí</p>
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
+										<p>Manage</p>
 								</a></li>
 								<li class="nav-item"><a href="${url}/user-edit.jsp"
 									class="nav-link"> <i class="far fa-circle nav-icon"></i>
-										<p>Chỉnh sửa</p>
+										<p>Edit or Add</p>
 								</a></li>
 							</ul></li>
 					</ul>
@@ -295,28 +288,29 @@
 					</div>
 					<div>
 						<table class="table table-striped">
-						    <thead>
-							    <tr>
-							      <th scope="col">User name</th>
-							      <th scope="col">Password</th>
-							      <th scope="col">Fullname</th>
-							      <th scope="col">Email</th>
-							      <th scope="col">Role</th>
-							      <th scope="col"></th>
-							    </tr>
-							  </thead>
-						  <tbody>
-						  		<c:forEach var="item" items="${items}">
-							    <tr>
-							      <th scope="row">${item.userID}</th>
-							      <td>${item.password}</td>
-							      <th>${item.fullName}</th>
-					              <th>${item.email}</th>
-					              <th>${item.admin?'Admin':'User'}</th>
-					              <th><a href="${url}/user-overview/edit/${item.userID}">edit</a> </th>
-							    </tr>
-							     </c:forEach>
-						  </tbody>
+							<thead>
+								<tr>
+									<th scope="col">User name</th>
+									<th scope="col">Password</th>
+									<th scope="col">Fullname</th>
+									<th scope="col">Email</th>
+									<th scope="col">Role</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="item" items="${items}">
+									<tr>
+										<th scope="row">${item.username}</th>
+										<td>${item.password}</td>
+										<th>${item.fullName}</th>
+										<th>${item.email}</th>
+										<th>${item.admin?'Admin':'User'}</th>
+										<th><a href="${url}/user-overview/edit/${item.username}">edit</a>
+										</th>
+									</tr>
+								</c:forEach>
+							</tbody>
 						</table>
 					</div>
 					<!-- /.row -->

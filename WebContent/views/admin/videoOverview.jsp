@@ -234,13 +234,13 @@
 								<p>
 									Videos <i class="right fas fa-angle-left"></i>
 								</p>
-						</a> <c:url var="uri" value="/admin" />
+						</a> <c:url var="url" value="/admin" />
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="${uri}/videoOverview.jsp"
+								<li class="nav-item"><a href="${url}/videoOverview.jsp"
 									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>Manage</p>
 								</a></li>
-								<li class="nav-item"><a href="${uri}/videoEdit.jsp"
+								<li class="nav-item"><a href="${url}/videoEdit.jsp"
 									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>Edit or Add</p>
 								</a></li>
@@ -251,13 +251,13 @@
 								<p>
 									User <i class="right fas fa-angle-left"></i>
 								</p>
-						</a> 
+						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="${uri}/user-overview.jsp"
+								<li class="nav-item"><a href="${url}/user-overview.jsp"
 									class="nav-link"> <i class="far fa-circle nav-icon"></i>
-										<p>Manager</p>
+										<p>Manage</p>
 								</a></li>
-								<li class="nav-item"><a href="${uri}/user-edit.jsp"
+								<li class="nav-item"><a href="${url}/user-edit.jsp"
 									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>Edit or Add</p>
 								</a></li>
@@ -276,83 +276,45 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1 class="m-0">Edit user</h1>
+							<h1 class="m-0">List videos</h1>
 						</div>
 						<!-- /.col -->
 						<div class="col-sm-6">
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
 							</ol>
 						</div>
 						<!-- /.col -->
 					</div>
 					<div>
-						<c:url var="url" value="/admin/user-edit" />
-						<form action="${url}/index">
-							<div class="form-group row">
-								<label for="inputEmail3" class="col-sm-2 col-form-label">User
-									name:</label>
-								<div class="col-sm-10">
-									<input value="${form.username}" name="username" type="text"
-										class="form-control" id="id" placeholder="Username">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="inputPassword3" class="col-sm-2 col-form-label">Password:</label>
-								<div class="col-sm-10">
-									<input value="${form.password}" name="password" type="password"
-										class="form-control" id="password" placeholder="Password">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="inputEmail3" class="col-sm-2 col-form-label">Full
-									name:</label>
-								<div class="col-sm-10">
-									<input value="${form.fullName}" name="fullName" type="text"
-										class="form-control" id="fullName" placeholder="Full name">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="inputEmail3" class="col-sm-2 col-form-label">Email:</label>
-								<div class="col-sm-10">
-									<input value="${form.email}" name="email" type="email"
-										class="form-control" id="email" placeholder="Email">
-								</div>
-							</div>
-							<fieldset class="form-group">
-								<div class="row">
-									<legend class="col-form-label col-sm-2 pt-0">Role</legend>
-									<div class="col-sm-10">
-										<div class="form-check">
-											<input ${form.admin?'checked':''} name="admin"
-												class="form-check-input" type="radio" name="gridRadios"
-												id="gridRadios1" value="true" checked> <label
-												class="form-check-label" for="gridRadios1"> Admin </label>
-										</div>
-										<div class="form-check">
-											<input ${form.admin?'':'checked'} name="admin"
-												class="form-check-input" type="radio" name="gridRadios"
-												id="gridRadios2" value="false"> <label
-												class="form-check-label" for="gridRadios2"> User </label>
-										</div>
-										<div class="form-check">
-											<h4>${msg}</h4>
-										</div>
-									</div>
-								</div>
-							</fieldset>
-							<div class="form-group row">
-								<div class="col-sm-10">
-									<button onclick="return kiemTra()" formaction="${url}/create"
-										class="btn btn-outline-secondary">Create</button>
-									<button onclick="return kiemTra()" formaction="${url}/update"
-										class="btn btn-outline-secondary">Update</button>
-									<button onclick="return kiemTra()" formaction="${url}/delete"
-										class="btn btn-outline-secondary">Delete</button>
-									<a class="btn btn-primary" href="${url}.jsp" role="button">Reset</a>
-								</div>
-							</div>
-						</form>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Title</th>
+									<th scope="col">Href</th>
+									<th scope="col">Poster</th>
+									<th scope="col">Views</th>
+									<th scope="col">Description</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="video" items="${videos}">
+									<tr>
+										<th scope="row">${video.title}</th>
+										<th>${video.href}</th>
+										<th><img
+											src="<c:url value='/views/user/img/${video.poster}'/>"
+											width="150px" height="150px" style="object-fit: contain;" />
+										</th>
+										<th>${video.views}</th>
+										<th>${video.description}</th>
+										<th><a href="${url}/videoOverview/edit/${video.href}">edit</a>
+										</th>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
 					</div>
 					<!-- /.row -->
 				</div>
@@ -431,6 +393,5 @@
 	<script src="<c:url value='/views/admin/dist/js/demo.js'/>"></script>
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script src="<c:url value='/views/admin/dist/js/pages/dashboard.js'/>"></script>
-
 </body>
 </html>

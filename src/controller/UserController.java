@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.UserDao;
+import dao.UserDaoImpl;
 import entity.User;
 import service.UserService;
 import service.UserServiceImpl;
 
-@WebServlet({"/login", "/register" , "/logout"})
+@WebServlet({"/login", "/register" , "/logout", "/changePassword"})
 public class UserController extends HttpServlet{
 	UserService userService = new UserServiceImpl();
 	
@@ -32,6 +34,9 @@ public class UserController extends HttpServlet{
 			case "/logout":
 				doGetLogout(session, req, resp);
 				break;
+			case "/changePassword":
+				doGetChangePassword(req, resp);
+				break;
 		}
 	}
 	
@@ -45,6 +50,9 @@ public class UserController extends HttpServlet{
 				break;
 			case "/register":
 				doPostRegister(session, req, resp);
+				break;
+			case "/changePassword":
+				doPostChangePassword(req, resp);
 				break;
 		}
 	}
@@ -62,7 +70,7 @@ public class UserController extends HttpServlet{
 			resp.sendRedirect("index");
 		}else {
 			req.setAttribute("message", "Invalid username or password");
-			req.getRequestDispatcher("/views/user/login.jsp");
+			req.getRequestDispatcher("/views/user/login.jsp").forward(req, resp);;
 		}
 	}
 	
@@ -95,5 +103,53 @@ public class UserController extends HttpServlet{
 	private void doGetLogout(HttpSession session, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		session.removeAttribute("currentUser");
 		resp.sendRedirect("index");
+	}
+	
+	private void doGetChangePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("views/user/changePassword.jsp").forward(req, resp);
+		
+	}
+	
+	private void doPostChangePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String userName = req.getParameter("username");
+		String currentPW = req.getParameter("curent_password");
+		String newPW1 = req.getParameter("new_password1");
+		String newPW2 = req.getParameter("new_password2");
+		UserDao uDao = new UserDaoImpl();
+		User user = new User();
+		user = uDao.findByUsername(userName);
+		String method = req.getMethod();
+		if(method.equals("POST")) {
+			if(check(req, resp) ) {
+				user.setPassword(newPW1);
+				uDao.update(user);
+				req.setAttribute("msg", "Change password successfully");	
+			}
+		}
+		req.getRequestDispatcher("views/user/changePassword.jsp").forward(req, resp);
+	}
+	
+	private boolean check(HttpServletRequest req, HttpServletResponse resp)   throws ServletException, IOException{
+		String userName = req.getParameter("username");
+		String currentPW = req.getParameter("curent_password");
+		String newPW1 = req.getParameter("new_password1");
+		String newPW2 = req.getParameter("new_password2");
+		UserDao uDao = new UserDaoImpl();
+		User user = new User();
+		user = uDao.findByUsername(userName);
+		if(user==null) {
+			req.setAttribute("msg", "Incorrect username");
+			return false;
+		}else if(!currentPW.contains(user.getPassword())) {
+			req.setAttribute("msg", "Incorrect password");
+			return false;
+		}else if(Integer.parseInt(newPW1)<6) {
+			req.setAttribute("msg", "Password must be more than 6 characters");
+			return false;
+		}else if(!newPW1.equals(newPW2)) {
+			req.setAttribute("msg", "Password and confirm password do not match");
+			return false;
+		}
+		return true;
 	}
 }
