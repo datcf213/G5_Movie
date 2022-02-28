@@ -308,7 +308,7 @@
 								<label for="inputEmail3" class="col-sm-2 col-form-label">Full
 									name:</label>
 								<div class="col-sm-10">
-									<input value="${form.fullName}" name="fullName" type="text"
+									<input value="${form.fullName}" name="fullname" type="text"
 										class="form-control" id="fullName" placeholder="Full name">
 								</div>
 							</div>

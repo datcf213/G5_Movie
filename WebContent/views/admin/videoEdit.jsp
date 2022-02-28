@@ -352,7 +352,7 @@
 												class="btn btn-outline-secondary">Update</button>
 											<button onclick="return kiemTra()" formaction="${url}/delete"
 												class="btn btn-outline-secondary">Delete</button>
-											<a class="btn btn-primary" href="${url}index.jsp"
+											<a class="btn btn-primary" href="${url}.jsp"
 												role="button">Reset</a>
 										</div>
 									</div>

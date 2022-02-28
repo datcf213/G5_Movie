@@ -39,6 +39,8 @@ public class AdminController extends HttpServlet {
 			req.setAttribute("items", uDao.findAll());
 			req.getRequestDispatcher("/views/admin/user-overview.jsp").forward(req, resp);
 		} else if (url.contains("create")) {
+			req.setCharacterEncoding("UTF-8");
+			resp.setCharacterEncoding("UTF-8");
 			if (check(req, resp)) {
 				try {
 					String username = req.getParameter("username"); 
@@ -87,7 +89,7 @@ public class AdminController extends HttpServlet {
 	private boolean check(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uN = req.getParameter("username");
 		String pW = req.getParameter("password");
-		String fN = req.getParameter("fullName");
+		String fN = req.getParameter("fullname");
 		String email = req.getParameter("email");
 		UserDao uDao = new UserDaoImpl();
 		User user = new User();
