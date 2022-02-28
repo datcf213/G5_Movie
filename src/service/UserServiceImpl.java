@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User create(String username, String password, String email, String fullname) {
+	public User create(String username, String password, String email, String fullname, boolean admin) {
 		User user = new User();
 		User exisUser = findByUsername(username);
 		if(exisUser!=null) {

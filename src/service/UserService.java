@@ -11,7 +11,7 @@ public interface UserService {
 	User findByEmai(String email);
 	List<User> findAll();
 	List<User> findAllPaging(int pageNumber, int pageSize);
-	User create(String username, String password, String email, String fullname);
+	User create(String username, String password, String email, String fullname, boolean admin);
 	User update(User entity);
 	User delete(String username);
 }
