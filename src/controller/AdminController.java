@@ -44,8 +44,10 @@ public class AdminController extends HttpServlet {
 					String username = req.getParameter("username"); 
 					String password = req.getParameter("password"); 
 					String email = req.getParameter("email"); 
-					String fullname =req.getParameter("fullname");
-					userService.create(username, password, email, fullname);
+					String fullname = req.getParameter("fullname");
+					String adminString = req.getParameter("gridRadios");
+					boolean admin = adminString.equals("true")?true:false;
+					userService.create(username, password, email, fullname, admin);
 					req.setAttribute("items", uDao.findAll());
 					req.getRequestDispatcher("/views/admin/user-overview.jsp").forward(req, resp);
 
