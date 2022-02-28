@@ -44,8 +44,9 @@ public class AdminController extends HttpServlet {
 					String username = req.getParameter("username"); 
 					String password = req.getParameter("password"); 
 					String email = req.getParameter("email"); 
-					String fullname =req.getParameter("fullname");
-					userService.create(username, password, email, fullname);
+					String fullname =req.getParameter("fullName");
+					Boolean admin = Boolean.parseBoolean(req.getParameter("admin"));
+					userService.create1(username, password, email, fullname, admin);
 					req.setAttribute("items", uDao.findAll());
 					req.getRequestDispatcher("/views/admin/user-overview.jsp").forward(req, resp);
 
@@ -57,8 +58,16 @@ public class AdminController extends HttpServlet {
 		} else if (url.contains("update")) {
 			if (check(req, resp)) {
 				try {
-					BeanUtils.populate(user, req.getParameterMap());
-					uDao.update(user);
+					String username = req.getParameter("username");
+					user = uDao.findByUsername(username);
+					int id = user.getUserId();
+					 
+					String password = req.getParameter("password"); 
+					String email = req.getParameter("email"); 
+					String fullname =req.getParameter("fullName");
+					Boolean admin = Boolean.parseBoolean(req.getParameter("admin"));
+//					BeanUtils.populate(user, req.getParameterMap());
+					userService.update1(id,username, password, email, fullname, admin);
 					req.setAttribute("items", uDao.findAll());
 					req.getRequestDispatcher("/views/admin/user-overview.jsp").forward(req, resp);
 				} catch (Exception e) {

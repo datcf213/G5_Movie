@@ -49,6 +49,7 @@
 									class="form-control rounded-0" placeholder="Confirm password"
 									required="" />
 							</div>
+							<div><h4>${msg}</h4></div>
 							<div class="form-group mb-0">
 								<button type="submit"
 									class="btn btn-primary rounded-0 d-block ml-auto mr-0 tm-btn-animate tm-btn-submit tm-icon-submit">

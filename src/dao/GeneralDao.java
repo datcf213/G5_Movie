@@ -14,7 +14,7 @@ public class GeneralDao<T>  {
 	
 	@Override
 	protected void finalize() throws Throwable {
-		entityManager.close();
+		//entityManager.close();
 		super.finalize();
 	}
 	

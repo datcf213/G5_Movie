@@ -139,15 +139,19 @@ public class UserController extends HttpServlet{
 		user = uDao.findByUsername(userName);
 		if(user==null) {
 			req.setAttribute("msg", "Incorrect username");
+			req.getRequestDispatcher("views/user/changePassword.jsp").forward(req, resp);
 			return false;
 		}else if(!currentPW.contains(user.getPassword())) {
 			req.setAttribute("msg", "Incorrect password");
+			req.getRequestDispatcher("views/user/changePassword.jsp").forward(req, resp);
 			return false;
 		}else if(Integer.parseInt(newPW1)<6) {
 			req.setAttribute("msg", "Password must be more than 6 characters");
+			req.getRequestDispatcher("views/user/changePassword.jsp").forward(req, resp);
 			return false;
 		}else if(!newPW1.equals(newPW2)) {
 			req.setAttribute("msg", "Password and confirm password do not match");
+			req.getRequestDispatcher("views/user/changePassword.jsp").forward(req, resp);
 			return false;
 		}
 		return true;

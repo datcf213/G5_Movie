@@ -325,13 +325,13 @@
 									<div class="col-sm-10">
 										<div class="form-check">
 											<input ${form.admin?'checked':''} name="admin"
-												class="form-check-input" type="radio" name="gridRadios"
+												class="form-check-input" type="radio"
 												id="gridRadios1" value="true" checked> <label
 												class="form-check-label" for="gridRadios1"> Admin </label>
 										</div>
 										<div class="form-check">
 											<input ${form.admin?'':'checked'} name="admin"
-												class="form-check-input" type="radio" name="gridRadios"
+												class="form-check-input" type="radio"
 												id="gridRadios2" value="false"> <label
 												class="form-check-label" for="gridRadios2"> User </label>
 										</div>
